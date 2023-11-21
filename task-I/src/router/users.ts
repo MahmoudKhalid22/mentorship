@@ -1,18 +1,31 @@
 const router = require("express").Router();
+const auth = require("../middleware/auth");
 
-import { createUser, getUsers, getUser,updateUser, deleteUser } from "../controller/users";
+import {
+  createUser,
+  loginUser,
+  getUsers,
+  getUser,
+  updateUser,
+  deleteUser,
+} from "../controller/users";
 
+// SIGN UP
 router.post("/users", createUser);
 
-router.get("/users", getUsers);
+// SIGN IN
+router.post("/users/login", loginUser);
 
-router.get("/user/:id", getUser);
-// router.get("/user/:id", () => console.log("requested"));
+// GET ALL USERS AFTER SIGN IN
+router.get("/users", auth, getUsers);
 
-router.patch("/user/:id",updateUser);
+// GET INFO OF USER AFTER SIGN IN
+router.get("/user/:id", auth, getUser);
 
-router.delete("/user/:id",deleteUser);
+// UPDATE USER AFTER SIGN IN
+router.patch("/user/:id", auth, updateUser);
 
-
+// DELETE USER AFTER SIGN IN
+router.delete("/user/:id", auth, deleteUser);
 
 module.exports = router;

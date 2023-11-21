@@ -27,6 +27,23 @@ const createUser = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+// SIGN IN USER
+const loginUser = async (req: Request, res: Response): Promise<void> => {
+  try {
+    const user = await UserModel.findByCredentials(
+      req.body.email,
+      req.body.password
+    );
+    const token = await user.generateAuthToken();
+    res.send({ user, token });
+  } catch (e) {
+    res.send({
+      e,
+      message: "internal server error",
+    });
+  }
+};
+
 const getUsers = async (req: Request, res: Response): Promise<void> => {
   try {
     const users: Document[] = await UserModel.find({});
@@ -69,4 +86,4 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-export { createUser, getUsers, getUser, updateUser, deleteUser };
+export { createUser, loginUser, getUsers, getUser, updateUser, deleteUser };
