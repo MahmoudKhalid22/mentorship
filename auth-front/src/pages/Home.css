@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 0 3rem;
+  border-radius: 20rem;
+}
+/* .container div {
+  height: 2rem;
+  width: 20rem;
+} */
+
+.imgContainer{
+    width: 50%;
+    height: 30rem;
+   
+}
+.formContainer{
+    width: 50%;
+    height: 30rem;
+    
+}
+
+.imgContainer img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 2rem 0 0 2rem;
+}
