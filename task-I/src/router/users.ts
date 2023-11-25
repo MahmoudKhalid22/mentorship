@@ -4,6 +4,7 @@ const auth = require("../middleware/auth");
 import {
   createUser,
   loginUser,
+  logoutUser,
   getUsers,
   getUser,
   updateUser,
@@ -15,6 +16,10 @@ router.post("/users", createUser);
 
 // SIGN IN
 router.post("/users/login", loginUser);
+
+// SIGN OUT
+router.post("/users/logout",auth,logoutUser);
+
 
 // GET ALL USERS AFTER SIGN IN
 router.get("/users", auth, getUsers);

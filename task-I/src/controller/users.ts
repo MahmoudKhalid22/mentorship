@@ -44,6 +44,22 @@ const loginUser = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+// LOGOUT USER
+const logoutUser = async (req: any, res: any) => {
+  try {
+    if (req.user.tokens) {
+      req.user.tokens = req.user[0]?.tokens.filter(
+        (token: any) => token.token !== req.token
+      );
+
+      await req.user.save();
+      res.send("You logged out");
+    }
+  } catch (err) {
+    res.send("the user is not found");
+  }
+};
+
 const getUsers = async (req: Request, res: Response): Promise<void> => {
   try {
     const users: Document[] = await UserModel.find({});
@@ -86,4 +102,12 @@ const deleteUser = async (req: Request, res: Response) => {
   }
 };
 
-export { createUser, loginUser, getUsers, getUser, updateUser, deleteUser };
+export {
+  createUser,
+  loginUser,
+  logoutUser,
+  getUsers,
+  getUser,
+  updateUser,
+  deleteUser,
+};
